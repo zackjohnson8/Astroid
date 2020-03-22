@@ -13,12 +13,12 @@ namespace Astroid
     public partial class MainForm : Form
     {
 
-        Bitmap bitmap;
+        Image bitmap_m;
+        BitmapImages.Ship ship_m;
 
         public MainForm()
         {
             InitializeComponent();
-            
         }
 
         private void Transparency(double opacityLevel = 1, bool transparencySetting = false)
@@ -47,9 +47,13 @@ namespace Astroid
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
-            bitmap = new Bitmap(64, 64);
-            SetBitmapSolidColor(ref bitmap, 64, 64, Color.Aqua);
-            e.Graphics.DrawImage((Image)bitmap, new PointF(0,0));
+            this.BackColor = Color.Black;
+
+            // Create a ship
+            ship_m = new BitmapImages.Ship(this);
+            ship_m.PaintToScreen(ref e);
+
+
         }
     }
 }

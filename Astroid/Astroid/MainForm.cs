@@ -46,14 +46,44 @@ namespace Astroid
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
             this.BackColor = Color.Black;
 
             // Create a ship
-            ship_m = new BitmapImages.Ship(this);
-            ship_m.PaintToScreen(ref e);
+            if (ship_m == null)
+            {
+                ship_m = new BitmapImages.Ship(this);
+                ship_m.PaintToScreen(ref e);
+            }else
+            {
+                ship_m.PaintToScreen(ref e);
+            }
+
+        }
 
 
+        protected override void OnPreviewKeyDown(PreviewKeyDownEventArgs e)
+        {
+            base.OnPreviewKeyDown(e);
+            if(e.KeyCode == Keys.Down)
+            {
+                ship_m.MoveDown();
+                panel1.Invalidate();
+            }else
+            if (e.KeyCode == Keys.Up)
+            {
+                ship_m.MoveUp();
+                panel1.Invalidate();
+            }else
+            if (e.KeyCode == Keys.Right)
+            {
+                ship_m.MoveRight();
+                panel1.Invalidate();
+            }else
+            if (e.KeyCode == Keys.Left)
+            {
+                ship_m.MoveLeft();
+                panel1.Invalidate();
+            }
         }
     }
 }

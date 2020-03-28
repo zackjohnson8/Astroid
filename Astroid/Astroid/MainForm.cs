@@ -7,14 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Astroid.AstroidUI;
 
 namespace Astroid
 {
     public partial class MainForm : Form
     {
 
-        Image bitmap_m;
-        BitmapImages.Ship ship_m;
+        //Image bitmap_m;
+        //BitmapImages.Ship ship_m;
+        Game game_m;
 
         public MainForm()
         {
@@ -46,44 +48,78 @@ namespace Astroid
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            this.BackColor = Color.Black;
-
-            // Create a ship
-            if (ship_m == null)
-            {
-                ship_m = new BitmapImages.Ship(this);
-                ship_m.PaintToScreen(ref e);
-            }else
-            {
-                ship_m.PaintToScreen(ref e);
-            }
-
+            game_m.Update(ref e);
         }
 
-
-        protected override void OnPreviewKeyDown(PreviewKeyDownEventArgs e)
+        protected override void OnShown(EventArgs e)
         {
-            base.OnPreviewKeyDown(e);
-            if(e.KeyCode == Keys.Down)
+            base.OnShown(e);
+            if (game_m == null)
             {
-                ship_m.MoveDown();
-                panel1.Invalidate();
-            }else
-            if (e.KeyCode == Keys.Up)
-            {
-                ship_m.MoveUp();
-                panel1.Invalidate();
-            }else
-            if (e.KeyCode == Keys.Right)
-            {
-                ship_m.MoveRight();
-                panel1.Invalidate();
-            }else
-            if (e.KeyCode == Keys.Left)
-            {
-                ship_m.MoveLeft();
-                panel1.Invalidate();
+                game_m = new Game(ref panel1);
+                game_m.StartGame();
+                Task.Delay(2000);
             }
+
         }
+
+        //private async Task StartGame()
+        //{
+        //   await game_m.StartGame(panel1);
+        //}
+
+        //private void Form1_KeyPress(Object sender, KeyPressEventArgs e)
+        //{
+        //Console.WriteLine()
+        //e.KeyChar
+        //if (e.KeyCode == Keys.Down)
+        //{
+        //    ship_m.MoveDown();
+        //    panel1.Invalidate();
+        //}
+        //else
+        //if (e.KeyCode == Keys.Up)
+        //{
+        //    ship_m.MoveUp();
+        //    panel1.Invalidate();
+        //}
+        //else
+        //if (e.KeyCode == Keys.Right)
+        //{
+        //    ship_m.MoveRight();
+        //    panel1.Invalidate();
+        //}
+        //else
+        //if (e.KeyCode == Keys.Left)
+        //{
+        //    ship_m.MoveLeft();
+        //    panel1.Invalidate();
+        //}
+        //}
+
+        //protected override void OnPreviewKeyDown(PreviewKeyDownEventArgs e)
+        //{
+        //    base.OnPreviewKeyDown(e);
+        //    if(e.KeyCode == Keys.Down)
+        //    {
+        //        ship_m.MoveDown();
+        //        panel1.Invalidate();
+        //    }else
+        //    if (e.KeyCode == Keys.Up)
+        //    {
+        //        ship_m.MoveUp();
+        //        panel1.Invalidate();
+        //    }else
+        //    if (e.KeyCode == Keys.Right)
+        //    {
+        //        ship_m.MoveRight();
+        //        panel1.Invalidate();
+        //    }else
+        //    if (e.KeyCode == Keys.Left)
+        //    {
+        //        ship_m.MoveLeft();
+        //        panel1.Invalidate();
+        //    }
+        //}
     }
 }

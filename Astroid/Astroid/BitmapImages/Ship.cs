@@ -19,7 +19,7 @@ namespace Astroid.BitmapImages
             RIGHT
         }
 
-        private Form form_m;
+        private Panel panel_m;
         private Image image_m;
         private PaintEventArgs PaintEventArgs_m;
         float width_m;
@@ -28,13 +28,13 @@ namespace Astroid.BitmapImages
         float y_m;
         double area_m;
 
-        public Ship(Form printedForm, float width_p = 64, float height_p = 64)
+        public Ship(float x, float y, float width_p = 64, float height_p = 64)
         {
-            form_m = printedForm;
+            //panel_m = printedForm;
             width_m = width_p;
             height_m = height_p;
-            x_m = printedForm.Size.Width/2 - width_m;
-            y_m = printedForm.Size.Height/2 - height_m;
+            x_m = x;
+            y_m = y;
             area_m = .5 * width_p * height_p;
             CreateShip();
         }

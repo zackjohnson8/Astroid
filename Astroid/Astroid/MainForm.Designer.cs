@@ -41,6 +41,7 @@
             this.panel1.Size = new System.Drawing.Size(994, 977);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+
             // 
             // MainForm
             // 
@@ -53,6 +54,7 @@
             this.Text = "Astroid";
             this.ResumeLayout(false);
             this.PerformLayout();
+            //this.KeyPress += Form1_KeyPress;
 
         }
 
